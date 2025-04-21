@@ -1,6 +1,6 @@
 # Scientific Calculator 
 
-This is the code for a fully funcitoning scientific calculator. 
+This is the code for a fully functioning scientific calculator. 
 
 There is a complete parsing engine to filter through operators and operands and comply with the order of operations. 
 
