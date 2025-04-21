@@ -1,2 +1,9 @@
-# Scientific-Calculator
-The code needed for a fully functioning scientific calculator.
+# Scientific Calculator 
+
+This is the code for a fully funcitoning scientific calculator. 
+
+There is a complete parsing engine to filter through operators and operands and comply with the order of operations. 
+
+There are plans to implement variable solution functionality. 
+
+There are also plans to implement graphing functionality.
