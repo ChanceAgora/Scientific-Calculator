@@ -6,9 +6,9 @@ def main():
 
 def parentheses(valStack, opStack):
     """Evaluates all operations in a parenthetical expression and stops at the opening parenthesis. Removes opening paren from the operator stack."""
-    while(not opStack[-1] == '('):
+    while(len(opStack) > 0 and not opStack[-1] == '('): #Ensures the operator stack has at least one element and stops when an opening paren is found
         operate(valStack, opStack)
-    operate.pop()
+    opStack.pop() #Removes opening paren
 
     
 def operate(valStack, opStack):
@@ -23,6 +23,7 @@ def operate(valStack, opStack):
         valStack[-2] = valStack[-2] + valStack[-1]
     elif(opStack[-1] == '-'):
         valStack[-2] = valStack[-2] - valStack[-1]
+    # Remove used value and used operator
     opStack.pop()
     valStack.pop()
 
@@ -40,7 +41,10 @@ def opPrecedence(op):
     elif(op == '+' or '-'): op = 1
     else: op = None
 
-def right_associative():
-    """Finds the last occurence of the rght associative operator and computes the result for all consecutive occurences leftward up to the first occurence which initiates the function."""
+def rightAssociative(op) -> bool:
+    """Returns true if the given operator is right associative. False otherwise."""
+    if(op == '^'): return True
+    return False
+
 
 main()
