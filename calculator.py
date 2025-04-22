@@ -12,10 +12,10 @@ def stackPriority(opStack, op) -> bool: # Return true if the stack operator need
     else: return False
     
 def opPrecedence(op):
-    if(op == '^'): op = 3
+    if(op == '('): op = 4
+    elif(op == '^'): op = 3
     elif(op == '*' or '/'): op = 2
     elif(op == '+' or '-'): op = 1
-    elif(op == '('): op = 0
     else: op = None
 
 # def right_associative():
