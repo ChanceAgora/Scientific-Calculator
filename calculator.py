@@ -6,8 +6,9 @@ def main():
     opStack = []
     
 
-def stackPriority(stackOp, op) -> bool:
-    if(opPrecedence(stackOp) >= opPrecedence(op)): return True
+def stackPriority(opStack, op) -> bool: # Return true if the stack operator needs to be executed, return false if add current operator to stack
+    if(len(opStack) == 0): return False
+    elif(opPrecedence(opStack[-1]) >= opPrecedence(op)): return True
     else: return False
     
 def opPrecedence(op):
@@ -17,12 +18,32 @@ def opPrecedence(op):
     elif(op == '('): op = 0
     else: op = None
 
-#def right_associative():
+# def right_associative():
     # calculate right associative operands like ^(power)
 
-#def parentheses():
-    # calculate all operands until parentheses set is resolved
-    # will begin when a closing parentheses is found and terminate when an opening parentheses is found
-    # this way a parenthetical expression will be entirely evaluated before continuing
+# def parentheses(valStack, opStack):
+   #  while(not opStack[-1] == '('): 
+
+def operate(valStack, opStack):
+    if(opStack[-1] == '^'):
+        valStack[-2] = valStack[-2] ** valStack[-1]
+        opStack.pop()
+        valStack.pop()
+    elif(opStack[-1] == '*'):
+        valStack[-2] = valStack[-2] * valStack[-1]
+        valStack.pop()
+        opStack.pop()
+    elif(opStack[-1] == '/'):
+        valStack[-2] = valStack[-2] / valStack[-1]
+        valStack.pop()
+        opStack.pop()
+    elif(opStack[-1] == '+'):
+        valStack[-2] = valStack[-2] + valStack[-1]
+        valStack.pop()
+        opStack.pop()
+    elif(opStack[-1] == '-'):
+        valStack[-2] = valStack[-2] - valStack[-1]
+        valStack.pop()
+        opStack.pop()
 
 main()
