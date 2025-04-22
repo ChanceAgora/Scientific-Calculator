@@ -1,10 +1,28 @@
 def main():
     x = input().split()
-    print(x)
 
     valStack = []
     opStack = []
+
+def parentheses(valStack, opStack):
+    while(not opStack[-1] == '('):
+        operate(valStack, opStack)
+    operate.pop()
+
     
+def operate(valStack, opStack):
+    if(opStack[-1] == '^'):
+        valStack[-2] = valStack[-2] ** valStack[-1]
+    elif(opStack[-1] == '*'):
+        valStack[-2] = valStack[-2] * valStack[-1]
+    elif(opStack[-1] == '/'):
+        valStack[-2] = valStack[-2] / valStack[-1]
+    elif(opStack[-1] == '+'):
+        valStack[-2] = valStack[-2] + valStack[-1]
+    elif(opStack[-1] == '-'):
+        valStack[-2] = valStack[-2] - valStack[-1]
+    opStack.pop()
+    valStack.pop()
 
 def stackPriority(opStack, op) -> bool: # Return true if the stack operator needs to be executed, return false if add current operator to stack
     if(len(opStack) == 0): return False
@@ -18,32 +36,7 @@ def opPrecedence(op):
     elif(op == '+' or '-'): op = 1
     else: op = None
 
-# def right_associative():
-    # calculate right associative operands like ^(power)
-
-# def parentheses(valStack, opStack):
-   #  while(not opStack[-1] == '('): 
-
-def operate(valStack, opStack):
-    if(opStack[-1] == '^'):
-        valStack[-2] = valStack[-2] ** valStack[-1]
-        opStack.pop()
-        valStack.pop()
-    elif(opStack[-1] == '*'):
-        valStack[-2] = valStack[-2] * valStack[-1]
-        valStack.pop()
-        opStack.pop()
-    elif(opStack[-1] == '/'):
-        valStack[-2] = valStack[-2] / valStack[-1]
-        valStack.pop()
-        opStack.pop()
-    elif(opStack[-1] == '+'):
-        valStack[-2] = valStack[-2] + valStack[-1]
-        valStack.pop()
-        opStack.pop()
-    elif(opStack[-1] == '-'):
-        valStack[-2] = valStack[-2] - valStack[-1]
-        valStack.pop()
-        opStack.pop()
+def right_associative():
+    """Finds the last occurence of the rght associative operator and computes the result for all consecutive occurences leftward up to the first occurence which initiates the function."""
 
 main()
