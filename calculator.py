@@ -6,10 +6,9 @@ def main():
     opStack = []
     
 
-
-
-def stackPriority(stackOP, op) -> bool:
-    return True
+def stackPriority(stackOp, op) -> bool:
+    if(opPrecedence(stackOp) >= opPrecedence(op)): return True
+    else: return False
     
 def opPrecedence(op):
     if(op == '^'): op = 3
