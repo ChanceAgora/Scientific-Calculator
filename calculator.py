@@ -47,5 +47,7 @@ def rightAssociative(op) -> bool:
     if(op == '^'): return True
     return False
 
+def numConverter(val):
+    """Converts the current number in a full expression from a string to a double."""
 
 main()
