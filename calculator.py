@@ -30,6 +30,7 @@ def operate(valStack, opStack):
 def stackPriority(opStack, op) -> bool:
     """Returns true if the top of the stack takes precedence in the order of operations compared to the compared operator. Returns false if stack is empty or does not take precedent."""
     if(len(opStack) == 0): return False
+    elif(rightAssociative(opStack[-1]) and opStack[-1] == op): return False # If the top of the operator stack is right associative and the current operator is the same, add the current operator to the stack to begin computing backwards
     elif(opPrecedence(opStack[-1]) >= opPrecedence(op)): return True
     else: return False
     
