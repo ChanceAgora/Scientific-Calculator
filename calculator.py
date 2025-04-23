@@ -47,7 +47,27 @@ def rightAssociative(op) -> bool:
     if(op == '^'): return True
     return False
 
-def numConverter(val):
+def numConverter(valStack, i) -> int:
     """Converts the current number in a full expression from a string to a double."""
+    charStack = []
+    decPlace = 1
+    while(valStack[i].isdigit() or valStack[i] == ',' or '.'):
+        charStack.append(valStack[i])
+        i += 1
+    for j in range(len(charStack)):
+        if charStack[j] is ',':
+            continue
+        elif charStack[j] is '.':
+            decPlace = -1
+        else:
+            if decPlace > 0:
+                result = result * 10 + valStack[j]
+            else:
+                result += (valStack[j] / (10 ** decPlace))
+        if decPlace > 0: 
+            decPlace += 1
+        else:
+            decPlace -= 1
+    return i
 
 main()
