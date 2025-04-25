@@ -1,73 +1,29 @@
+import enum
+
 def main():
-    x = input().split()
+    x = Token(TokenType.NUMBER, 3.14159)
+    print(x)
 
-    valStack = []
-    opStack = []
-
-def parentheses(valStack, opStack):
-    """Evaluates all operations in a parenthetical expression and stops at the opening parenthesis. Removes opening paren from the operator stack."""
-    while(len(opStack) > 0 and not opStack[-1] == '('): #Ensures the operator stack has at least one element and stops when an opening paren is found
-        operate(valStack, opStack)
-    opStack.pop() #Removes opening paren
-
+class Token:
+    def __init__(self, type_, value=None):
+        self.type = type_
+        self.value = value
     
-def operate(valStack, opStack):
-    """Executes the operator from the top of the operator stack on the top two values from the value stack."""
-    if(opStack[-1] == '^'):
-        valStack[-2] = valStack[-2] ** valStack[-1]
-    elif(opStack[-1] == '*'):
-        valStack[-2] = valStack[-2] * valStack[-1]
-    elif(opStack[-1] == '/'):
-        valStack[-2] = valStack[-2] / valStack[-1]
-    elif(opStack[-1] == '+'):
-        valStack[-2] = valStack[-2] + valStack[-1]
-    elif(opStack[-1] == '-'):
-        valStack[-2] = valStack[-2] - valStack[-1]
-    # Remove used value and used operator
-    opStack.pop()
-    valStack.pop()
+    def __str__(self):
+        return f"{self.type.name}({self.value})"
+        
+class TokenType(enum.Enum):
+    NUMBER = "NUMBER"
+    OPERATOR = "OPERATOR"
+    IDENTIFIER = "IDENTIFIER"
 
-def stackPriority(opStack, op) -> bool:
-    """Returns true if the top of the stack takes precedence in the order of operations compared to the compared operator. Returns false if stack is empty or does not take precedent."""
-    if(len(opStack) == 0): return False
-    elif(rightAssociative(opStack[-1]) and opStack[-1] == op): return False # If the top of the operator stack is right associative and the current operator is the same, add the current operator to the stack to begin computing backwards
-    elif(opPrecedence(opStack[-1]) >= opPrecedence(op)): return True
-    else: return False
-    
-def opPrecedence(op):
-    """Outputs values associated with operator symbols in accordance with the order of operations. """
-    if(op == '('): op = 4
-    elif(op == '^'): op = 3
-    elif(op == '*' or '/'): op = 2
-    elif(op == '+' or '-'): op = 1
-    else: op = None
+OPERATORS = {
+    "+": lambda a, b: a + b,
+    "-": lambda a, b: a - b,
+    "*": lambda a, b: a * b,
+    "/": lambda a, b: a / b,
+    "^": lambda a, b: a ** b
+}
 
-def rightAssociative(op) -> bool:
-    """Returns true if the given operator is right associative. False otherwise."""
-    if(op == '^'): return True
-    return False
-
-def numConverter(valStack, i) -> int:
-    """Converts the current number in a full expression from a string to a double."""
-    charStack = []
-    decPlace = 1
-    while(valStack[i].isdigit() or valStack[i] == ',' or '.'):
-        charStack.append(valStack[i])
-        i += 1
-    for j in range(len(charStack)):
-        if charStack[j] is ',':
-            continue
-        elif charStack[j] is '.':
-            decPlace = -1
-        else:
-            if decPlace > 0:
-                result = result * 10 + valStack[j]
-            else:
-                result += (valStack[j] / (10 ** decPlace))
-        if decPlace > 0: 
-            decPlace += 1
-        else:
-            decPlace -= 1
-    return i
 
 main()
