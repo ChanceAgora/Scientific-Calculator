@@ -1,22 +1,19 @@
-class FSM:
+class dispatchFSM:
     index = 0
 
     def next(self):
-        FSM.index += 1
+        dispatchFSM.index += 1
 
     def error(self):
-        for i in range(FSM.index):
+        for i in range(dispatchFSM.index):
             print(" ", end="")
         print("^")
 
-class dispatchFSM(FSM):
+class numberFSM(dispatchFSM):
     pass
 
-class numberFSM(FSM):
+class operatorFSM(dispatchFSM):
     pass
 
-class operatorFSM(FSM):
-    pass
-
-class IdentifierFSM(FSM):
+class IdentifierFSM(dispatchFSM):
     pass
