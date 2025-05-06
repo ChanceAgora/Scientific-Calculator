@@ -1,12 +1,12 @@
 class FSM:
     index = 0
 
-    def next():
+    def next(self):
         FSM.index += 1
 
-    def error():
+    def error(self):
         for i in range(FSM.index):
-            print(" ")
+            print(" ", end="")
         print("^")
 
 class dispatchFSM(FSM):
