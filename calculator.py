@@ -1,7 +1,6 @@
 import FSM_Models
 
 
-
 # Loop input in perpetuity until user quits
 # Take Input 
 #
