@@ -37,7 +37,13 @@ class DispatchFSM:
 
 class NumberFSM(DispatchFSM):
     def lexChar(self, equation):
-        pass
+        buffer = 0
+        if self.state == "START":
+            match equation:
+                case '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0':
+                    buffer += equfation[DispatchFSM.index]
+                case '.':
+                    self.state = "DECIMAL"
 
 class OperatorFSM(DispatchFSM):
     pass
