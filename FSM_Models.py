@@ -35,8 +35,6 @@ class DispatchFSM:
         print("^")
 
 class NumberFSM(DispatchFSM):
-    validChars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '-']
-
     def __init__(self):
         super()
         decimalValue = 0.1 # Used to properly add numbers from the input string to the correct number place after a decimal (divide by 10 for all subsequent numbers after 0.x, i.e. 0.01, 0.001, etc.)
@@ -45,10 +43,7 @@ class NumberFSM(DispatchFSM):
     def lexChar(self, equation):
         bufferNum = None
         for DispatchFSM.index in range(equation.size() + 1): # Can parse to end of input in needed
-            if equation[DispatchFSM.index] not in NumberFSM.validChars:
-                self.state = "START"
-                DispatchFSM.tokens.append(bufferNum)
-            elif self.state == "START":
+            if self.state == "START":
                 match equation:
                     case '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0':
                         bufferNum = int(equation[DispatchFSM.index])
@@ -64,6 +59,12 @@ class NumberFSM(DispatchFSM):
                 match equation:
                     case '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0':
                         bufferNum = (bufferNum * 10) + equation[DispatchFSM.index]
+                        break
+                    case '.':
+                        self.state = "DECIMAL"
+                        break
+                    case _:
+                        self.state = "DONE"
 
 class OperatorFSM(DispatchFSM):
     pass
