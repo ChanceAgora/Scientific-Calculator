@@ -58,7 +58,7 @@ class NumberFSM(DispatchFSM):
             elif self.state == "INTEGER":
                 match equation:
                     case '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0':
-                        bufferNum = (bufferNum * 10) + equation[DispatchFSM.index]
+                        bufferNum = (bufferNum * 10) + int(equation[DispatchFSM.index])
                         break
                     case '.':
                         self.state = "DECIMAL"
